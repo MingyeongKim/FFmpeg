@@ -101,7 +101,7 @@ static int activate(AVFilterContext *ctx)
         if (status == AVERROR_EOF) {
             pts = av_rescale_q(pts, inlink->time_base, outlink->time_base);
             if (!s->pad_stop && !s->pad_start) {
-                ff_outlink_set_status(outlink, status, pts);
+                ff_outlink_set_status(outlink, status, s->pts + pts);
                 return 0;
             }
             s->eof = 1;
